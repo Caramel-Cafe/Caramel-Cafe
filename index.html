@@ -894,6 +894,54 @@
     <a href="#Burgers">Option 3</a>
   </div>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Page Title</title>
+<style>
+/* Your CSS code here */
+.dropbtn {
+  font-family: "Arial", sans-serif; /* Use a nice font */
+  color: darkorange; /* Dark orange color */
+  background-color: transparent; /* Transparent background */
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Glowing effect */
+.dropbtn:hover {
+  color: orange; /* Orange color on hover */
+  text-shadow: 0 0 5px orange; /* Glow effect */
+}
+</style>
+</head>
+<body>
+
+<!-- Your HTML content here -->
+
+<script>
+  // JavaScript to toggle dropdown content
+  document.addEventListener("DOMContentLoaded", function() {
+    var dropdowns = document.getElementsByClassName("dropdown");
+    for (var i = 0; i < dropdowns.length; i++) {
+      dropdowns[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.getElementsByClassName("dropdown-content")[0];
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
 
 <script>
   // JavaScript to toggle dropdown content
