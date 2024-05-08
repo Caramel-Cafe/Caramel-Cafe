@@ -867,37 +867,55 @@
 
           <p class="section-subtitle text-center label-2">Main Menu</p>
 
-          <li class="navbar-item">
-            <a href="#home" class="navbar-link hover-underline active">
-              <div class="separator"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dropdown Effect</title>
+<style>
+  /* Styling for dropdown */
+  .dropdown-content {
+    display: none;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+</head>
+<body>
 
-              <span class="span">Salads</span>
-            </a>
-          </li>
+<!-- Dropdown -->
+<div class="dropdown">
+  <button class="dropbtn">Click me</button>
+  <div class="dropdown-content">
+    <a href="#">Option 1</a>
+    <a href="#">Option 2</a>
+    <a href="#">Option 3</a>
+  </div>
+</div>
 
-                    <li class="navbar-item">
-            <a href="#home" class="navbar-link hover-underline active">
-              <div class="separator"></div>
+<script>
+  // JavaScript to toggle dropdown content
+  document.addEventListener("DOMContentLoaded", function() {
+    var dropdowns = document.getElementsByClassName("dropdown");
+    for (var i = 0; i < dropdowns.length; i++) {
+      dropdowns[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.getElementsByClassName("dropdown-content")[0];
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  });
+</script>
 
-              <span class="span">Main Meal</span>
-            </a>
-          </li>
+</body>
+</html>
 
-                    <li class="navbar-item">
-            <a href="#home" class="navbar-link hover-underline active">
-              <div class="separator"></div>
-
-              <span class="span">Habesha</span>
-            </a>
-          </li>
-
-                    <li class="navbar-item">
-            <a href="#home" class="navbar-link hover-underline active">
-              <div class="separator"></div>
-
-              <span class="span">Pizza</span>
-            </a>
-          </li>
           
           <h2 class="headline-1 section-title text-center">Starters</h2>
 
