@@ -177,7 +177,7 @@ html {
 }
 
 body {
-  background-color: var(--our-vanilla);
+  background-color: var(--eerie-black-1);
   color: var(--white);
   font-family: var(--fontFamily-dm_sans);
   font-size: var(--fontSize-body-4);
