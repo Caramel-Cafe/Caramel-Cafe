@@ -58,7 +58,7 @@
     - #TOP BAR
   -->
 
-  <div class="topbar">
+  <div class="topbar" id="topbar">
     <div class="container">
 
       <address class="topbar-item">
@@ -102,6 +102,19 @@
     </div>
   </div>
 
+  <script>
+  var prevScrollpos = window.pageYOffset;
+
+  window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("topbar").style.top = "0";
+    } else {
+      document.getElementById("topbar").style.top = "-50px"; // Adjust the height of your top bar here
+    }
+    prevScrollpos = currentScrollPos;
+  }
+</script>
 
 
 
