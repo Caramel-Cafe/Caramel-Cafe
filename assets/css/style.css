@@ -2143,51 +2143,52 @@ textarea.input-field {
 
 }
 
-nav {
-  &.primary-navigation {
-    margin: 0 auto;
-    display: block;
-  
-    padding: 120px 0 0 0;  
-    text-align: center;
-    font-size: 16px;
+/* Your existing CSS styles */
 
-    ul li {
-      list-style: none;
-      margin: 0 auto;
-      border-left: 2px solid #3ca0e7;
-      display: inline-block;
-      padding: 0 30px;
-      position: relative;
-      text-decoration: none;
-      text-align: center;
-      font-family: arvo;
-    }
+nav.primary-navigation {
+  margin: 0 auto;
+  display: block;
+  padding: 120px 0 0 0;
+  text-align: center;
+  font-size: 16px;
+}
 
-    li a {
-      color: orange;
-    }
+nav.primary-navigation ul li {
+  list-style: none;
+  margin: 0 auto;
+  border-left: 2px solid #3ca0e7;
+  display: inline-block;
+  padding: 0 30px;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Arvo', sans-serif; /* Apply the Arvo font */
+}
 
-    li a:hover {
-      color: #3ca0e7;
-    }
+nav.primary-navigation li a {
+  color: orange;
+}
 
-    li:hover {
-      cursor: pointer;
-    }
+nav.primary-navigation li a:hover {
+  color: #3ca0e7;
+}
 
-    ul li ul {
-      visibility: hidden;
-      opacity: 0;
-      position: absolute;
-padding-left: 0;
-      left: 0;
-      display: none;
-      background: white;
-    }
+nav.primary-navigation li:hover {
+  cursor: pointer;
+}
 
-ul li:hover > ul,
-ul li ul:hover {
+nav.primary-navigation ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  padding-left: 0;
+  left: 0;
+  display: none;
+  background: white;
+}
+
+nav.primary-navigation ul li:hover > ul,
+nav.primary-navigation ul li ul:hover {
   visibility: visible;
   opacity: 1;
   display: block;
@@ -2200,33 +2201,31 @@ ul li ul:hover {
   border-radius: 10px; /* Adjust the value for desired curve */
 }
 
+nav.primary-navigation ul li ul li {
+  clear: both;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  border-style: none;
+}
 
-    ul li ul li {
-      clear: both;
-      width: 100%;
-      text-align: left;
-      margin-bottom: 20px;
-      border-style: none;
-    }
-
-    ul li ul li a:hover {
-      padding-left: 10px;
-      border-left: 2px solid #3ca0e7;
-      transition: all 0.3s ease;
-    }
-  }
+nav.primary-navigation ul li ul li a:hover {
+  padding-left: 10px;
+  border-left: 2px solid #3ca0e7;
+  transition: all 0.3s ease;
 }
 
 a {
-
-    text-decoration: none;
-
-    &:hover {
-        color: #3CA0E7;
-    }
- 
+  text-decoration: none;
 }
 
- ul li ul li a { transition: all 0.5s ease; }
+a:hover {
+  color: #3CA0E7;
+}
+
+ul li ul li a {
+  transition: all 0.5s ease;
+}
+
 
 
