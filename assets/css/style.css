@@ -614,7 +614,7 @@ body.nav-active { overflow: hidden; }
 }
 
 .header.active {
-  padding-block: 20px;
+  padding-block: 15px;
   background-color: var(--eerie-black-4);
   border-color: var(--black-alpha-15);
 }
@@ -625,7 +625,7 @@ body.nav-active { overflow: hidden; }
 }
 
 .header .container {
-  padding-inline: 20px;
+  padding-inline: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
