@@ -2143,49 +2143,34 @@ textarea.input-field {
 
 }
 
-.menu-link:hover .service-card {
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.menu-link:active .service-card {
-  transform: scale(0.98);
-  transition: transform 0.1s;
-}
-
-.menu-link:visited .service-card {
-  color: inherit;
-}
-
-.menu-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Shine effect on scroll */
-.menu-link:hover .service-card:before {
-  content: "";
-  position: absolute;
-  top: -110%;
-  left: -210%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0) 80%
-  );
-  transform: rotate(30deg);
-  transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  pointer-events: none;
-}
-
-.menu-link:hover .service-card:before {
-  top: -30%;
-  left: -30%;
-  transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .menu-item img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .menu-item span {
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+  }
+  .menu-item:hover img {
+    transform: scale(1.1);
+  }
+  .menu-item:hover span {
+    color: #1E90FF; /* Change color on hover */
+  }
+</style>
 
 
 
