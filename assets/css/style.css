@@ -2167,6 +2167,14 @@ textarea.input-field {
   .menu-item:hover img {
     transform: scale(1.1);
   }
+.menu-item-text {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.menu-item-text img {
+  margin-right: 10px; /* Add some space between the image and text */
+}
 </style>
 
 
