@@ -2180,35 +2180,6 @@ textarea.input-field {
 
 
 
-.topbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-}
 
-.topbar-item {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-}
-
-.topbar .separator {
-    display: none; /* Hide separator lines on small screens */
-}
-
-/* Media query for screens smaller than 768px */
-@media (min-width: 768px) {
-    .topbar {
-        flex-direction: row;
-        justify-content: space-around;
-    }
-
-    .topbar .separator {
-        display: inline-block; /* Show separators on larger screens */
-    }
-}
 
 
