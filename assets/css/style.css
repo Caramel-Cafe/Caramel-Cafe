@@ -2180,40 +2180,35 @@ textarea.input-field {
 
 
 
-.video-cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire area */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; /* Keeps the video behind the content */
-}
-
-/* Default styling for desktop */
 .topbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #333;
     color: #fff;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
+    padding: 10px;
 }
 
-/* Mobile-specific styling */
-@media (max-width: 768px) {
+.topbar-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.topbar .separator {
+    display: none; /* Hide separator lines on small screens */
+}
+
+/* Media query for screens smaller than 768px */
+@media (min-width: 768px) {
     .topbar {
-        display: flex;
-        flex-direction: column; /* Stack items vertically on mobile */
-        padding: 10px 0;
+        flex-direction: row;
+        justify-content: space-around;
     }
-    .topbar-item {
-        margin: 5px 0;
-        font-size: 14px;
+
+    .topbar .separator {
+        display: inline-block; /* Show separators on larger screens */
     }
 }
+
 
