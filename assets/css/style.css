@@ -2190,4 +2190,30 @@ textarea.input-field {
     z-index: -1; /* Keeps the video behind the content */
 }
 
+/* Default styling for desktop */
+.topbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+/* Mobile-specific styling */
+@media (max-width: 768px) {
+    .topbar {
+        display: flex;
+        flex-direction: column; /* Stack items vertically on mobile */
+        padding: 10px 0;
+    }
+    .topbar-item {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+}
 
