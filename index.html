@@ -484,21 +484,72 @@
         </p>
 
         <!-- WhatsApp options container -->
-        <div id="whatsapp-options" style="display: none; padding-top: 10px;">
+        <div id="whatsapp-options" class="whatsapp-popup" style="display: none;">
             <p>Select a number to order from:</p>
             <ul>
                 <li><a href="https://wa.me/256759859795?text=Order%20from%20CARAMEL%20BREAKY" target="_blank">+256 759 859795</a></li>
                 <li><a href="https://wa.me/256794417777?text=Order%20from%20CARAMEL%20BREAKY" target="_blank">+256 794 417777</a></li>
             </ul>
+            <button onclick="hideWhatsAppOptions()">Close</button>
         </div>
 
     </div>
 </li>
 
+<style>
+    .whatsapp-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .whatsapp-popup p {
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+
+    .whatsapp-popup ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .whatsapp-popup ul li {
+        margin: 5px 0;
+    }
+
+    .whatsapp-popup ul li a {
+        text-decoration: none;
+        color: #25D366;
+        font-weight: bold;
+    }
+
+    .whatsapp-popup button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
 <script>
     function showWhatsAppOptions() {
-        var options = document.getElementById('whatsapp-options');
-        options.style.display = options.style.display === 'none' ? 'block' : 'none';
+        document.getElementById('whatsapp-options').style.display = 'block';
+    }
+
+    function hideWhatsAppOptions() {
+        document.getElementById('whatsapp-options').style.display = 'none';
     }
 </script>
 
