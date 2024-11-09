@@ -466,21 +466,15 @@
 
 <li>
     <div class="menu-card hover:card">
-
         <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
             <img src="./assets/images/CARAMEL BREAKY.png" width="100" height="100" loading="lazy" alt="CARAMEL BREAKY"
                 class="img-cover" onclick="showWhatsAppOptions()">
         </figure>
 
-      <div>
-
-        
         <div class="title-wrapper">
             <h3 class="title-3">
                 <a class="card-title">CARAMEL BREAKY</a>
             </h3>
-
-          
             <span class="span title-2">UGX 35,000</span>
         </div>
 
@@ -489,7 +483,7 @@
         </p>
 
         <!-- WhatsApp options container -->
-        <div id="whatsapp-options" class="whatsapp-popup" style="display: none;">
+        <div id="whatsapp-options" class="whatsapp-popup" style="display: none;" onclick="event.stopPropagation()">
             <p>Select a number to order from:</p>
             <ul>
                 <li><a href="https://wa.me/256759859795?text=Order%20for%20CARAMEL%20BREAKY" target="_blank" onclick="hideWhatsAppOptions()">Munyonyo Branch</a></li>
@@ -502,20 +496,21 @@
             <button onclick="hideWhatsAppOptions()">Close</button>
         </div>
 
-        </div>
     </div>
 </li>
 
 <script>
     function showWhatsAppOptions() {
-        document.getElementById('whatsapp-options').style.display = 'block';
+        const popup = document.getElementById('whatsapp-options');
+        popup.style.display = 'block';
         
         // Add an event listener for clicks outside the popup
         document.addEventListener('click', outsideClickListener);
     }
 
     function hideWhatsAppOptions() {
-        document.getElementById('whatsapp-options').style.display = 'none';
+        const popup = document.getElementById('whatsapp-options');
+        popup.style.display = 'none';
         
         // Remove the outside click listener
         document.removeEventListener('click', outsideClickListener);
@@ -523,7 +518,9 @@
 
     function outsideClickListener(event) {
         const popup = document.getElementById('whatsapp-options');
-        if (popup.style.display === 'block' && !popup.contains(event.target) && event.target !== document.querySelector('.img-cover')) {
+        
+        // Check if click was outside the popup and the image
+        if (!popup.contains(event.target) && event.target.className !== 'img-cover') {
             hideWhatsAppOptions();
         }
     }
