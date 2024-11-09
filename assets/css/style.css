@@ -2178,6 +2178,54 @@ textarea.input-field {
 </style>
 
 
+<style>
+    .whatsapp-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        padding: 15px;
+        background-color: #ffebcd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .whatsapp-popup p {
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+
+    .whatsapp-popup ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .whatsapp-popup ul li {
+        margin: 5px 0;
+    }
+
+    .whatsapp-popup ul li a {
+        text-decoration: none;
+        color: #8b4513;
+        font-weight: bold;
+    }
+
+    .whatsapp-popup button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #333;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+
 
 
 
