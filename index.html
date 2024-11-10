@@ -420,57 +420,6 @@
       </section>
 
 
-      <!-- 
-      Whatsapp popup script
-      -->
-<script>
-    function showWhatsAppOptions(dishName) {
-        const popup = document.getElementById('whatsapp-options');
-        const linksContainer = document.getElementById('whatsapp-links');
-        
-        // Clear previous links
-        linksContainer.innerHTML = '';
-
-        // Define branch numbers and labels
-        const branches = [
-            { number: '256759859795', label: 'Munyonyo Branch' },
-            { number: '256794417777', label: 'Acacia Branch' },
-            { number: '256709769548', label: 'Lubowa Branch' },
-            { number: '256781800800', label: 'Naalya Branch' },
-            { number: '256709410410', label: 'Kansanga Branch' },
-            { number: '256766550001', label: 'Ntinda Branch' }
-        ];
-
-        // Add updated links with the dish name
-        branches.forEach(branch => {
-            const link = document.createElement('li');
-            link.innerHTML = `<a href="https://wa.me/${branch.number}?text=Order%20for%20${encodeURIComponent(dishName)}" target="_blank" onclick="hideWhatsAppOptions()">${branch.label}</a>`;
-            linksContainer.appendChild(link);
-        });
-
-        popup.style.display = 'block';
-        
-        // Add an event listener for clicks outside the popup
-        document.addEventListener('click', outsideClickListener);
-    }
-
-    function hideWhatsAppOptions() {
-        const popup = document.getElementById('whatsapp-options');
-        popup.style.display = 'none';
-        
-        // Remove the outside click listener
-        document.removeEventListener('click', outsideClickListener);
-    }
-
-    function outsideClickListener(event) {
-        const popup = document.getElementById('whatsapp-options');
-        
-        // Check if click was outside the popup and the image
-        if (!popup.contains(event.target) && event.target.className !== 'img-cover') {
-            hideWhatsAppOptions();
-        }
-    }
-</script>
 
       <!-- 
         - #Breakfast Menu
