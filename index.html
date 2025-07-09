@@ -76,36 +76,69 @@
   -Bottom Menu Bar
 -->
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bottom Menu Bar</title>
-    <style>
-        /* Styling for the bottom menu bar */
-        .bottom-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-            padding: 10px 0;
-            text-align: center;
-            color: #fff;
-            z-index: 1000; /* Adjust the z-index as needed */
-        }
-        
-        /* Styling for the menu items */
-        .bottom-menu a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 13px;
-            display: inline-block; /* Display menu items in a row */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bottom Menu Bar</title>
+<style>
+  body {
+    margin: 0;
+    padding-bottom: 50px; /* leave room so content isn't hidden behind the menu */
+    font-family: sans-serif;
+  }
+
+  .bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .bottom-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    padding: 6px 8px;
+  }
+
+  .bottom-menu a:hover {
+    background: #444;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .bottom-menu {
+      font-size: 12px;
+      padding: 6px 0;
+    }
+  }
+</style>
 </head>
+<body>
+
+<!-- Your content here -->
+
+<div class="bottom-menu">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+</div>
+
+</body>
 </html>
+
 
 
   
