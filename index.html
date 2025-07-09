@@ -81,11 +81,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bottom Menu Bar</title>
+<title>Bottom Menu Bar with Dropdowns</title>
 <style>
   body {
     margin: 0;
-    padding-bottom: 50px; /* leave room so content isn't hidden behind the menu */
+    padding-bottom: 60px; /* room for menu */
     font-family: sans-serif;
   }
 
@@ -96,25 +96,62 @@
     width: 100%;
     background: #333;
     color: #fff;
-    text-align: center;
     padding: 8px 0;
-    z-index: 1000;
     display: flex;
     justify-content: center;
     gap: 16px;
+    z-index: 1000;
   }
 
-  .bottom-menu a {
+  .bottom-menu a,
+  .bottom-menu .dropbtn {
     color: #fff;
     text-decoration: none;
     font-size: 14px;
-    display: inline-block;
     padding: 6px 8px;
+    display: inline-block;
   }
 
-  .bottom-menu a:hover {
+  .bottom-menu a:hover,
+  .bottom-menu .dropbtn:hover {
     background: #444;
     border-radius: 4px;
+  }
+
+  .dropdown-focus {
+    position: relative;
+    outline: none;
+  }
+
+  .dropdown-focus .dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%; /* pop‑up above menu */
+    background: #fff;
+    color: #333;
+    min-width: 140px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: opacity 0.15s ease-in-out;
+    border-radius: 4px;
+    z-index: 1001;
+  }
+
+  .dropdown-focus .dropdown-content a {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .dropdown-focus .dropdown-content a:hover {
+    background: #f0f0f0;
+  }
+
+  /* Show dropdown on focus/click */
+  .dropdown-focus:focus .dropdown-content {
+    visibility: visible;
+    opacity: 1;
   }
 
   @media (max-width: 600px) {
@@ -127,12 +164,29 @@
 </head>
 <body>
 
-<!-- Your content here -->
+<!-- Your page content here -->
 
 <div class="bottom-menu">
   <a href="#Breakfast Menu">Breakfast</a>
-  <a href="#Main Menu">Main Menu</a>
-  <a href="#Drinks Menu">Drinks</a>
+
+  <div class="dropdown-focus" tabindex="0">
+    <span class="dropbtn">Main Menu ▾</span>
+    <div class="dropdown-content">
+      <a href="#appetizers">Appetizers</a>
+      <a href="#entrees">Entrees</a>
+      <a href="#desserts">Desserts</a>
+    </div>
+  </div>
+
+  <div class="dropdown-focus" tabindex="0">
+    <span class="dropbtn">Drinks ▾</span>
+    <div class="dropdown-content">
+      <a href="#coffee">Coffee</a>
+      <a href="#tea">Tea</a>
+      <a href="#soda">Soda</a>
+    </div>
+  </div>
+
   <a href="#Kids Menu">Kids</a>
   <a href="#Cakes Menu">Cakes</a>
 </div>
