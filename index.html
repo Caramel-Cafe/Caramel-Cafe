@@ -81,126 +81,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bottom Menu Bar with Dropdowns</title>
+<title>Bottom Menu Bar with JS Dropdowns</title>
 <style>
-  body {
-    margin: 0;
-    padding-bottom: 60px; /* room for menu */
-    font-family: sans-serif;
-  }
+  body { margin:0; padding-bottom:60px; font-family:sans-serif; }
+  .bottom-menu { position:fixed; bottom:0; left:0; width:100%; background:#333; color:#fff;
+    padding:8px 0; display:flex; justify-content:center; gap:16px; z-index:1000; }
 
-  .bottom-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #333;
-    color: #fff;
-    padding: 8px 0;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    z-index: 1000;
+  .bottom-menu a, .dropbtn {
+    color:#fff; text-decoration:none; font-size:14px; padding:6px 8px; display:inline-block;
   }
+  .bottom-menu a:hover, .dropbtn:hover { background:#444; border-radius:4px; }
 
-  .bottom-menu a,
-  .bottom-menu .dropbtn {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 6px 8px;
-    display: inline-block;
+  .dropdown { position:relative; }
+  .dropdown-content {
+    display:none; position:absolute; bottom:100%; background:#fff; color:#333;
+    min-width:140px; box-shadow:0 2px 6px rgba(0,0,0,0.2); border-radius:4px; z-index:1001;
   }
+  .dropdown-content a {
+    display:block; padding:8px 12px; color:#333; text-decoration:none;
+  }
+  .dropdown-content a:hover { background:#f0f0f0; }
+  .dropdown.open .dropdown-content { display:block; }
 
-  .bottom-menu a:hover,
-  .bottom-menu .dropbtn:hover {
-    background: #444;
-    border-radius: 4px;
-  }
-
-  .dropdown-focus {
-    position: relative;
-    outline: none;
-  }
-
-  .dropdown-focus .dropdown-content {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    bottom: 100%; /* pop‑up above menu */
-    background: #fff;
-    color: #333;
-    min-width: 140px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    transition: opacity 0.15s ease-in-out;
-    border-radius: 4px;
-    z-index: 1001;
-  }
-
-  .dropdown-focus .dropdown-content a {
-    display: block;
-    padding: 8px 12px;
-    color: #333;
-    text-decoration: none;
-  }
-
-  .dropdown-focus .dropdown-content a:hover {
-    background: #f0f0f0;
-  }
-
-  /* Show dropdown on focus/click */
-  .dropdown-focus:focus .dropdown-content {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  @media (max-width: 600px) {
-    .bottom-menu {
-      font-size: 12px;
-      padding: 6px 0;
-    }
-  }
+  @media (max-width:600px) { .bottom-menu { font-size:12px; padding:6px 0; } }
 </style>
 </head>
 <body>
 
-<!-- Your page content here -->
-
 <div class="bottom-menu">
-  <a href="#Breakfast Menu">Breakfast</a>
+  <a href="#Breakfast">Breakfast</a>
 
-  <div class="dropdown-focus" tabindex="0">
+  <div class="dropdown">
     <span class="dropbtn">Main Menu ▾</span>
     <div class="dropdown-content">
+      <!-- Add your items here -->
       <a href="#Starters">Starters</a>
-      <a href="#Fresh Salads">Salads</a>
-      <a href="#Main Course (chicken)">Main Course (chicken)</a>
-      <a href="#Main Course (beef)">Main Course (beef)</a>
-      <a href="#Main Course (fish)">Main Course (fish)</a>
-      <a href="#Habesha">Habesha</a>
-      <a href="#Pasta">Pasta</a>
-      <a href="#Burgers">Burgers</a>
-      <a href="#Sandwich">Sandwich</a>
-      <a href="#Pizzeria">Pizzeria</a>
+      <a href="#Salads">Salads</a>
+      <!-- etc. -->
     </div>
   </div>
 
-  <div class="dropdown-focus" tabindex="0">
+  <div class="dropdown">
     <span class="dropbtn">Drinks ▾</span>
     <div class="dropdown-content">
+      <!-- Add your items here -->
       <a href="#Coffee">Coffee</a>
       <a href="#Tea">Tea</a>
-      <a href="#Soft Drinks">Soft Drinks</a>
-      <a href="#soda">Mocktails</a>
-      <a href="#soda">Cocktails</a>
-      <a href="#soda">Soda</a>
-      <a href="#soda">Soda</a>
+      <!-- etc. -->
     </div>
   </div>
 
-  <a href="#Kids Menu">Kids</a>
-  <a href="#Cakes Menu">Cakes</a>
+  <a href="#Kids">Kids</a>
+  <a href="#Cakes">Cakes</a>
 </div>
+
+<script>
+  document.querySelectorAll('.dropdown').forEach(drop => {
+    const btn = drop.querySelector('.dropbtn');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      drop.classList.toggle('open');
+      // Close others if desired
+      document.querySelectorAll('.dropdown').forEach(d => {
+        if (d !== drop) d.classList.remove('open');
+      });
+    });
+  });
+
+  window.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+  });
+</script>
 
 </body>
 </html>
@@ -2135,33 +2086,40 @@ potatoes & french beans
           <ul class="grid-list">
 
           
-            <li>
-              <div class="menu-card hover:card">
+<li>
+  <div class="menu-card hover:card">
 
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/BEEF BURGER.png" width="100" height="100" loading="lazy" alt="BEEF BURGER"
-                    class="img-cover">
-                </figure>
+    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+      <picture>
+        <!-- Modern format -->
+        <source srcset="./assets/images/BEEF BURGER.webp" type="image/webp">
+        <!-- Fallback for older browsers -->
+        <img
+          src="./assets/images/BEEF BURGER.jpg"
+          width="100"
+          height="100"
+          loading="lazy"
+          alt="BEEF BURGER"
+          class="img-cover">
+      </picture>
+    </figure>
 
-                <div>
+    <div>
+      <div class="title-wrapper">
+        <h3 class="title-3">
+          <a href="#" class="card-title">BEEF BURGER</a>
+        </h3>
+        <span class="span title-2">UGX 33,000</span>
+      </div>
 
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="#" class="card-title">BEEF BURGER</a>
-                    </h3>
+      <p class="card-text label-1">
+        Beef patty, fresh tomatoes, onions, lettuce, gherkins & mayonnaise
+      </p>
+    </div>
 
-                    <span class="span title-2">UGX 33,000</span>
-                  </div>
+  </div>
+</li>
 
-                  <p class="card-text label-1">
-                    beef patty, fresh tomatoes, onions, lettuce, gherkins
- & mayonnaise
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
 
             <li>
               <div class="menu-card hover:card">
