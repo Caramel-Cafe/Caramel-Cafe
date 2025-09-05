@@ -2225,18 +2225,6 @@ textarea.input-field {
     }
 </style>
 
-.menu-card .card-banner.img-holder {
-    width: 200px !important;
-    height: 200px !important;
-}
-
-.menu-card .card-banner.img-holder img {
-    width: 200px !important;
-    height: 200px !important;
-    object-fit: cover;
-    display: block;
-}
-
 
 
 
