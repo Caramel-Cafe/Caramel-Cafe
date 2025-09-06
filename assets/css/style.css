@@ -2240,22 +2240,20 @@ textarea.input-field {
 
 
 /* Dropdown container Top Bar*/
-.dropdown {
-  position: relative;
-  display: inline-block;
+/* Hide checkbox */
+.dropdown-toggle {
+  display: none;
 }
 
-/* Button look (inherits your topbar style) */
+/* Style button */
 .dropbtn {
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
   cursor: pointer;
+  color: inherit;
+  font: inherit;
   padding: 0;
 }
 
-/* Dropdown content */
+/* Dropdown menu */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -2265,7 +2263,6 @@ textarea.input-field {
   z-index: 1000;
 }
 
-/* Dropdown links */
 .dropdown-content a {
   color: black;
   padding: 8px 12px;
@@ -2277,8 +2274,8 @@ textarea.input-field {
   background-color: #f0f0f0;
 }
 
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
+/* Show menu when checkbox is checked */
+.dropdown-toggle:checked ~ .dropdown-content {
   display: block;
 }
 
