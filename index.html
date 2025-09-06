@@ -259,17 +259,19 @@
 
     <div class="separator"></div>
 
-    <!-- Contacts Dropdown -->
+    <!-- Contacts Dropdown (CSS only) -->
     <div class="topbar-item dropdown">
       <div class="icon">
         <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
       </div>
-      <div class="dropdown-wrapper">
-        <button class="dropbtn">Contacts ▾</button>
-        <div class="dropdown-content">
-          <a href="tel:8383">Siem: 8383</a>
-          <a href="tel:3884">Wedi: 3884</a>
-        </div>
+
+      <!-- Checkbox toggle -->
+      <input type="checkbox" id="contacts-toggle" class="dropdown-toggle">
+      <label for="contacts-toggle" class="dropbtn">Contacts ▾</label>
+
+      <div class="dropdown-content">
+        <a href="tel:8383">Siem: 8383</a>
+        <a href="tel:3884">Wedi: 3884</a>
       </div>
     </div>
 
