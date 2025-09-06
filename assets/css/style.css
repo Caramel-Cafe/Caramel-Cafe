@@ -2239,6 +2239,48 @@ textarea.input-field {
 }
 
 
+/* Dropdown container Top Bar*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Button look (inherits your topbar style) */
+.dropbtn {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 
 
