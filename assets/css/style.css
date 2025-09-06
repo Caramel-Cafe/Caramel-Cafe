@@ -2239,46 +2239,5 @@ textarea.input-field {
 }
 
 
-/* Dropdown container Top Bar*/
-/* Hide checkbox */
-.dropdown-toggle {
-  display: none;
-}
-
-/* Style button */
-.dropbtn {
-  cursor: pointer;
-  color: inherit;
-  font: inherit;
-  padding: 0;
-}
-
-/* Dropdown menu */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
-  z-index: 1000;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 8px 12px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f0f0f0;
-}
-
-/* Show menu when checkbox is checked */
-.dropdown-toggle:checked ~ .dropdown-content {
-  display: block;
-}
-
-
 
 
