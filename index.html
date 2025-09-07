@@ -226,65 +226,58 @@
 </html>
 
 
-  
+  <!-- Sidebar Toggle Checkbox (hidden) -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
 
+<!-- Hamburger Button -->
+<label for="menu-toggle" class="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
 
-<body>
-  <!-- HAMBURGER BUTTON -->
-  <button class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-content">
+    <label for="menu-toggle" class="close-btn">&times;</label>
 
-  <!-- SIDEBAR MENU -->
-  <aside class="sidebar" id="sidebar">
-    <button class="close-btn" id="closeSidebar">&times;</button>
+    <!-- Location -->
+    <div class="sidebar-item">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>Caramel Cafe and Lounge, Kampala, Uganda</span>
+    </div>
 
-    <div class="sidebar-content">
-      <!-- Location -->
-      <div class="sidebar-item">
-        <ion-icon name="location-outline"></ion-icon>
-        <span>Caramel Cafe and Lounge, Kampala, Uganda</span>
-      </div>
+    <div class="separator"></div>
 
-      <div class="separator"></div>
+    <!-- Opening Hours -->
+    <div class="sidebar-item">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>Daily: 7:00 am – 11:00 pm</span>
+    </div>
 
-      <!-- Opening Hours -->
-      <div class="sidebar-item">
-        <ion-icon name="time-outline"></ion-icon>
-        <span>Daily: 7:00 am – 11:00 pm</span>
-      </div>
+    <div class="separator"></div>
 
-      <div class="separator"></div>
-
-      <!-- Contacts -->
-      <div class="sidebar-item">
-        <ion-icon name="call-outline"></ion-icon>
-        <div>
-          <a href="tel:8383">Siem: 8383</a><br>
-          <a href="tel:3884">Wedi: 3884</a>
-        </div>
-      </div>
-
-      <div class="separator"></div>
-
-      <!-- Email -->
-      <div class="sidebar-item">
-        <ion-icon name="mail-outline"></ion-icon>
-        <a href="mailto:caramelcafelounge@gmail.com">caramelcafelounge@gmail.com</a>
+    <!-- Contacts -->
+    <div class="sidebar-item">
+      <ion-icon name="call-outline"></ion-icon>
+      <div>
+        <a href="tel:8383">Siem: 8383</a><br>
+        <a href="tel:3884">Wedi: 3884</a>
       </div>
     </div>
-  </aside>
 
-  <!-- OVERLAY -->
-  <div class="overlay" id="overlay"></div>
+    <div class="separator"></div>
 
-  <!-- Your existing content goes here -->
+    <!-- Email -->
+    <div class="sidebar-item">
+      <ion-icon name="mail-outline"></ion-icon>
+      <a href="mailto:caramelcafelounge@gmail.com">caramelcafelounge@gmail.com</a>
+    </div>
+  </div>
+</aside>
 
-  <!-- JS link (make sure it's before </body>) -->
-  <script src="./assets/js/script.js"></script>
-</body>
+<!-- Overlay -->
+<label for="menu-toggle" class="overlay"></label>
 
 
 
