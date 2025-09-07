@@ -71,12 +71,6 @@
   </div>
 
 
-  <!-- Search -->
-<div class="sidebar-item search-box">
-  <ion-icon name="search-outline"></ion-icon>
-  <input type="text" placeholder="Search..." />
-</div>
-
 
   
 <!--
@@ -233,10 +227,10 @@
 </html>
 
 
-  <!-- Sidebar Toggle Checkbox (hidden) -->
-<input type="checkbox" id="menu-toggle" class="menu-toggle" hidden>
+<!-- Sidebar Toggle Checkbox (hidden) -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-<!-- Hamburger Button (only visible on small screens) -->
+<!-- Hamburger Button -->
 <label for="menu-toggle" class="hamburger">
   <span></span>
   <span></span>
@@ -248,12 +242,17 @@
   <div class="sidebar-content">
     <label for="menu-toggle" class="close-btn">&times;</label>
 
+    <!-- Search Bar -->
+    <div class="sidebar-item search-box">
+      <ion-icon name="search-outline"></ion-icon>
+      <input type="text" placeholder="Search..." />
+    </div>
+
     <!-- Location -->
     <div class="sidebar-item">
       <ion-icon name="location-outline"></ion-icon>
       <span>Caramel Cafe and Lounge, Kampala, Uganda</span>
     </div>
-
 
     <!-- Opening Hours -->
     <div class="sidebar-item">
@@ -284,6 +283,7 @@
 
 <!-- Overlay -->
 <label for="menu-toggle" class="overlay"></label>
+
 
 
 
