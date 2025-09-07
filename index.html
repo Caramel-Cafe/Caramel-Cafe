@@ -229,47 +229,39 @@
   
 
 
-  <!-- 
-    - #TOP BAR
-  -->
+ <!-- HAMBURGER BUTTON -->
+<button class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
 
- <div class="topbar" id="topbar">
-  <div class="container">
+<!-- SIDEBAR MENU -->
+<aside class="sidebar" id="sidebar">
+  <button class="close-btn" id="closeSidebar">&times;</button>
 
+  <div class="sidebar-content">
     <!-- Location -->
-    <address class="topbar-item">
-      <div class="icon">
-        <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-      </div>
-      <span class="span">
-        Caramel Cafe and Lounge, Kampala, Uganda
-      </span>
-    </address>
-
-    <div class="separator"></div>
-
-    <!-- Opening Hours -->
-    <div class="topbar-item item-2">
-      <div class="icon">
-        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-      </div>
-      <span class="span">Daily: 7:00 am to 11:00 pm</span>
+    <div class="sidebar-item">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>Caramel Cafe and Lounge, Kampala, Uganda</span>
     </div>
 
     <div class="separator"></div>
 
-    <!-- Contacts Dropdown (CSS only) -->
-    <div class="topbar-item dropdown">
-      <div class="icon">
-        <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-      </div>
+    <!-- Opening Hours -->
+    <div class="sidebar-item">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>Daily: 7:00 am – 11:00 pm</span>
+    </div>
 
-      <!-- Checkbox toggle -->
-      <input type="checkbox" id="contacts-toggle" class="dropdown-toggle">
-      <label for="contacts-toggle" class="dropbtn">Contacts ▾</label>
+    <div class="separator"></div>
 
-      <div class="dropdown-content">
-        <a href="tel:8383">Siem: 8383</a>
+    <!-- Contacts -->
+    <div class="sidebar-item">
+      <ion-icon name="call-outline"></ion-icon>
+      <div>
+        <a href="tel:8383">Siem: 8383</a><br>
         <a href="tel:3884">Wedi: 3884</a>
       </div>
     </div>
@@ -277,18 +269,15 @@
     <div class="separator"></div>
 
     <!-- Email -->
-    <a href="mailto:caramelcafelounge@gmail.com" class="topbar-item link">
-      <div class="icon">
-        <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-      </div>
-      <span class="span">caramelcafelounge@gmail.com</span>
-    </a>
-
+    <div class="sidebar-item">
+      <ion-icon name="mail-outline"></ion-icon>
+      <a href="mailto:caramelcafelounge@gmail.com">caramelcafelounge@gmail.com</a>
+    </div>
   </div>
-</div>
+</aside>
 
-
-
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
 
 
 
