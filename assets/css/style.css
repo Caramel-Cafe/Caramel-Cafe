@@ -2360,6 +2360,36 @@ textarea.input-field {
   }
 }
 
+/* Search box */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.search-box input {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--smoky-black-2);
+  color: var(--white);
+}
+
+.search-box input::placeholder {
+  color: var(--white);
+}
+
+/* Change placeholder and input text to gold when sidebar open */
+.menu-toggle:checked ~ .sidebar .search-box input {
+  color: var(--gold-crayola);
+}
+
+.menu-toggle:checked ~ .sidebar .search-box input::placeholder {
+  color: var(--gold-crayola);
+}
 
 
 
