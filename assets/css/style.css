@@ -2330,25 +2330,6 @@ textarea.input-field {
   }
 }
 
-/* Default text color */
-.sidebar-item span,
-.sidebar-item a,
-.close-btn {
-  color: #ffffff; /* all text white by default */
-}
-
-/* When sidebar is opened */
-.menu-toggle:checked ~ .sidebar .sidebar-item span,
-.menu-toggle:checked ~ .sidebar .sidebar-item a,
-.menu-toggle:checked ~ .sidebar .close-btn {
-  color: var(--gold-crayola);
-}
-
-/* Keep icons the same */
-.sidebar-item ion-icon {
-  color: var(--gold-crayola);
-}
-
 
 
 
