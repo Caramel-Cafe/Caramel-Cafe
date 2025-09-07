@@ -194,21 +194,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.querySelector('.search-box input');
-  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const searchInput = document.getElementById('page-search');
 
   searchInput.addEventListener('input', () => {
-    const value = searchInput.value.toLowerCase();
-    sidebarItems.forEach(item => {
+    const query = searchInput.value.toLowerCase();
+    const contentItems = document.querySelectorAll('.searchable'); // Add class "searchable" to elements you want to search
+
+    contentItems.forEach(item => {
       const text = item.textContent.toLowerCase();
-      if (text.includes(value)) {
-        item.style.display = 'flex';
+      if (text.includes(query)) {
+        item.style.display = ''; // show item
       } else {
-        item.style.display = 'none';
+        item.style.display = 'none'; // hide item
       }
     });
   });
 });
+
 
 
 
