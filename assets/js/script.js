@@ -193,6 +193,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+const searchInput = document.querySelector('.search-box input');
+const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+searchInput.addEventListener('input', () => {
+  const value = searchInput.value.toLowerCase();
+  sidebarItems.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(value)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+
 
 
 
