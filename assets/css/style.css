@@ -2323,7 +2323,7 @@ textarea.input-field {
 .menu-toggle:checked ~ .sidebar .sidebar-item,
 .menu-toggle:checked ~ .sidebar .sidebar-item a,
 .menu-toggle:checked ~ .sidebar .search-box input::placeholder {
-  color: gold;
+  color: var(--gold-crayola);
 }
 
 /* Overlay */
