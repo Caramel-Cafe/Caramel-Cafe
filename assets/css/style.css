@@ -2250,9 +2250,10 @@ textarea.input-field {
 .hamburger {
   position: fixed;
   top: 20px;
-  left: 20px;
-  z-index: 1001;
+  right: 20px;
+  z-index: 1100;
   cursor: pointer;
+  display: none; /* hidden on desktop */
 }
 .hamburger span {
   display: block;
@@ -2297,6 +2298,7 @@ textarea.input-field {
 }
 .sidebar-item a {
   color: var(--gold-crayola);
+  text-decoration: none;
 }
 .sidebar-item ion-icon {
   font-size: 20px;
@@ -2317,6 +2319,17 @@ textarea.input-field {
   opacity: 1;
   visibility: visible;
 }
+
+/* Responsive behavior */
+@media (max-width: 991px) {
+  .hamburger {
+    display: block; /* show hamburger on tablets/phones */
+  }
+  .topbar {
+    display: none; /* hide topbar on small screens */
+  }
+}
+
 
 
 
