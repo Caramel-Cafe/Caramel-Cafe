@@ -2253,33 +2253,14 @@ textarea.input-field {
   right: 20px;
   z-index: 1100;
   cursor: pointer;
-  display: block; /* always visible */
-  width: 30px;
-  height: 24px;
+  display: block;
 }
-
 .hamburger span {
   display: block;
-  width: 100%;
+  width: 30px;
   height: 3px;
   margin: 6px 0;
-  background-color: var(--white); /* default white */
-  transition: 0.4s;
-}
-
-/* Transform hamburger into X when sidebar open */
-.menu-toggle:checked + .hamburger span:nth-child(1) {
-  transform: rotate(-45deg) translate(-6px, 6px);
-  background-color: var(--gold-crayola);
-}
-
-.menu-toggle:checked + .hamburger span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle:checked + .hamburger span:nth-child(3) {
-  transform: rotate(45deg) translate(-6px, -6px);
-  background-color: var(--gold-crayola);
+  background-color: white;
 }
 
 /* Sidebar */
@@ -2289,24 +2270,22 @@ textarea.input-field {
   left: -320px;
   width: 300px;
   height: 100%;
-  background-color: var(--smoky-black-1);
+  background-color: #111; /* all white text inside */
   padding: 30px 20px;
-  transition: left 0.4s ease;
+  transition: 0.3s;
   z-index: 1002;
   overflow-y: auto;
 }
-
-/* Show sidebar when checkbox is checked */
 .menu-toggle:checked ~ .sidebar {
   left: 0;
 }
 
-/* Close button inside sidebar */
+/* Close button */
 .sidebar .close-btn {
   display: block;
   text-align: right;
   font-size: 2rem;
-  color: var(--gold-crayola);
+  color: white;
   cursor: pointer;
 }
 
@@ -2315,81 +2294,60 @@ textarea.input-field {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: var(--white); /* default white */
+  color: white;
   margin: 15px 0;
-  transition: color 0.3s ease;
 }
-
-/* Change text color when sidebar open */
-.menu-toggle:checked ~ .sidebar .sidebar-item {
-  color: var(--gold-crayola);
-}
-
 .sidebar-item a {
-  color: inherit; /* inherit from parent */
+  color: white;
   text-decoration: none;
 }
-
 .sidebar-item ion-icon {
   font-size: 20px;
-  color: var(--gold-crayola); /* icons stay gold */
+  color: white;
+}
+
+/* Search box */
+.search-box input {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #222;
+  color: white;
+}
+.search-box input::placeholder {
+  color: white;
+}
+
+/* Text color changes when sidebar open */
+.menu-toggle:checked ~ .sidebar .sidebar-item,
+.menu-toggle:checked ~ .sidebar .sidebar-item a,
+.menu-toggle:checked ~ .sidebar .search-box input::placeholder {
+  color: gold;
 }
 
 /* Overlay */
 .overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--black-alpha-80);
+  background: rgba(0,0,0,0.6);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition: 0.3s;
   z-index: 1000;
 }
-
-/* Show overlay when sidebar open */
 .menu-toggle:checked ~ .overlay {
   opacity: 1;
   visibility: visible;
 }
 
-/* Responsive: optional */
+/* Responsive behavior */
 @media (min-width: 992px) {
-  .hamburger span {
-    width: 35px;
-    height: 4px;
+  .hamburger {
+    display: block; /* show on PC */
   }
 }
 
-/* Search box */
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  color: var(--white);
-}
-
-.search-box input {
-  flex: 1;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--smoky-black-2);
-  color: var(--white);
-}
-
-.search-box input::placeholder {
-  color: var(--white);
-}
-
-/* Change placeholder and input text to gold when sidebar open */
-.menu-toggle:checked ~ .sidebar .search-box input {
-  color: var(--gold-crayola);
-}
-
-.menu-toggle:checked ~ .sidebar .search-box input::placeholder {
-  color: var(--gold-crayola);
-}
 
 
 
