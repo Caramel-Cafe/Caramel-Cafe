@@ -2270,7 +2270,7 @@ textarea.input-field {
   left: -320px;
   width: 300px;
   height: 100%;
-  background-color: #111; /* all white text inside */
+  background-color: #111; /* dark background */
   padding: 30px 20px;
   transition: 0.3s;
   z-index: 1002;
@@ -2294,16 +2294,31 @@ textarea.input-field {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: white;
+  color: white; /* default white */
   margin: 15px 0;
+  transition: color 0.3s ease; /* smooth color change */
 }
 .sidebar-item a {
-  color: white;
+  color: inherit; /* inherit from sidebar-item */
   text-decoration: none;
 }
 .sidebar-item ion-icon {
   font-size: 20px;
-  color: white;
+  color: inherit; /* icon color same as text */
+}
+
+/* Make text gold when clicked/focused (CSS only) */
+.sidebar-item:active,
+.sidebar-item:focus-within {
+  color: hsl(38, 61%, 73%); /* gold color */
+}
+.sidebar-item:active a,
+.sidebar-item:focus-within a {
+  color: hsl(38, 61%, 73%);
+}
+.sidebar-item:active ion-icon,
+.sidebar-item:focus-within ion-icon {
+  color: hsl(38, 61%, 73%);
 }
 
 /* Search box */
@@ -2318,7 +2333,6 @@ textarea.input-field {
 .search-box input::placeholder {
   color: white;
 }
-
 
 /* Overlay */
 .overlay {
@@ -2341,6 +2355,7 @@ textarea.input-field {
     display: block; /* show on PC */
   }
 }
+
 
 
 
