@@ -303,103 +303,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Floating Search Button</title>
+  <title>Fancy Floating Search</title>
   <style>
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
+      background: #111;
+      color: white;
+      min-height: 200vh; /* just for scroll test */
     }
 
-    /* Floating search button container */
+    /* Floating search container */
     .search-container {
       position: fixed;
       top: 20px;
-      right: 20px;
+      left: 20px;  /* opposite side of hamburger */
       z-index: 1200;
       display: flex;
       align-items: center;
       gap: 8px;
+      background: #222;
+      border-radius: 30px;
+      padding: 6px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: width 0.3s ease, background 0.3s ease;
+      width: 50px;  /* start small */
+      overflow: hidden;
     }
 
-    /* Search button (lens icon) */
+    /* Expanded state */
+    .search-container.active {
+      width: 250px; /* expand smoothly */
+      background: #333;
+    }
+
+    /* Search icon button */
     .search-btn {
-      background: #111;
+      background: none;
       color: white;
       border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
       font-size: 22px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+      flex-shrink: 0;
     }
 
     .search-btn:hover {
-      background: hsl(38, 61%, 73%);
-      color: #111;
+      color: hsl(38, 61%, 73%);
     }
 
-    /* Hidden search input */
+    /* Search input */
     .search-input {
-      display: none;
-      padding: 10px 14px;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      font-size: 16px;
+      flex: 1;
+      padding: 6px 10px;
+      border: none;
+      font-size: 15px;
       outline: none;
-      background: white;
-      color: black;
+      background: transparent;
+      color: white;
+      display: none;
     }
 
-    /* Show input when active */
     .search-container.active .search-input {
       display: block;
     }
 
-    /* Highlight search matches */
-    mark {
-      background: hsl(38, 61%, 73%);
-      color: black;
-      padding: 2px 4px;
-      border-radius: 3px;
+    .search-input::placeholder {
+      color: #bbb;
     }
 
     /* Navigation buttons */
     .nav-btn {
       display: none;
-      background: #111;
+      background: #444;
       color: white;
       border: none;
-      border-radius: 4px;
-      padding: 6px 10px;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
       font-size: 14px;
       cursor: pointer;
     }
 
     .search-container.active .nav-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-btn:hover {
       background: hsl(38, 61%, 73%);
       color: #111;
     }
+
+    /* Highlighted search text */
+    mark {
+      background: hsl(38, 61%, 73%);
+      color: black;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Floating Search Button -->
-  <div class="search-container">
+  <!-- Floating Search -->
+  <div class="search-container" id="searchContainer">
+    <button class="search-btn" id="searchBtn">🔍︎</button>
     <input type="text" id="searchInput" class="search-input" placeholder="Search...">
     <button class="nav-btn" id="prevBtn">⬆</button>
     <button class="nav-btn" id="nextBtn">⬇</button>
-    <button class="search-btn" id="searchBtn">🔍︎</button>
   </div>
 
+  <h1>Caramel Cafe and Lounge</h1>
+  <p>Try our Breakfast menu, Coffee, Smoothies, Fresh Juices, Mojitos, and more.</p>
+  <p>Enjoy Pasta, Burgers, Sandwiches, Pizzeria, and a wide selection of Main Courses.</p>
+  <p>Our Bakery & Pastry section has delicious treats daily.</p>
+
   <script>
+    const container = document.getElementById("searchContainer");
     const searchBtn = document.getElementById("searchBtn");
     const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
@@ -408,11 +429,14 @@
     let matches = [];
     let currentIndex = -1;
 
-    // Toggle input visibility (keeps visible once opened)
+    // Toggle expand on button click
     searchBtn.addEventListener("click", () => {
-      const container = document.querySelector(".search-container");
-      container.classList.add("active"); // always stay active
-      searchInput.focus();
+      container.classList.toggle("active");
+      if (container.classList.contains("active")) {
+        searchInput.focus();
+      } else {
+        resetHighlights();
+      }
     });
 
     // Reset highlights
@@ -474,7 +498,6 @@
       }
     });
   </script>
-
 </body>
 </html>
 
