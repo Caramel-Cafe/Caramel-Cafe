@@ -310,7 +310,7 @@
       font-family: "Poppins", sans-serif;
       background: #111;
       color: white;
-      min-height: 200vh; /* just for scroll test */
+      min-height: 200vh; /* just to allow scrolling */
     }
 
     /* Floating search container */
@@ -371,17 +371,19 @@
       color: #bbb;
     }
 
-    /* Navigation buttons */
+    /* Navigation buttons (fancy arrows) */
     .nav-btn {
       display: none;
       background: #444;
       color: white;
       border: none;
       border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
       cursor: pointer;
+      line-height: 30px;
+      text-align: center;
     }
 
     .search-container.active .nav-btn {
@@ -410,14 +412,9 @@
   <div class="search-container" id="searchContainer">
     <button class="search-btn" id="searchBtn">🔍︎</button>
     <input type="text" id="searchInput" class="search-input" placeholder="Search...">
-    <button class="nav-btn" id="prevBtn">⬆</button>
-    <button class="nav-btn" id="nextBtn">⬇</button>
+    <button class="nav-btn" id="prevBtn">▲</button>
+    <button class="nav-btn" id="nextBtn">▼</button>
   </div>
-
-  <h1>Caramel Cafe and Lounge</h1>
-  <p>Try our Breakfast menu, Coffee, Smoothies, Fresh Juices, Mojitos, and more.</p>
-  <p>Enjoy Pasta, Burgers, Sandwiches, Pizzeria, and a wide selection of Main Courses.</p>
-  <p>Our Bakery & Pastry section has delicious treats daily.</p>
 
   <script>
     const container = document.getElementById("searchContainer");
