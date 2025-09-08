@@ -307,7 +307,6 @@
   <style>
     body {
       margin: 0;
-      padding: 20px;
       font-family: "Poppins", sans-serif;
     }
 
@@ -315,8 +314,11 @@
     .search-container {
       position: fixed;
       top: 20px;
-      right: 70px; /* next to hamburger */
+      right: 20px;
       z-index: 1200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* Search button (lens icon) */
@@ -325,9 +327,9 @@
       color: white;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -343,71 +345,135 @@
     /* Hidden search input */
     .search-input {
       display: none;
-      position: absolute;
-      top: 0;
-      right: 50px;
-      width: 200px;
-      padding: 8px 12px;
-      border-radius: 20px;
+      padding: 10px 14px;
+      border-radius: 25px;
       border: 1px solid #ccc;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
+      background: white;
+      color: black;
     }
 
     /* Show input when active */
     .search-container.active .search-input {
       display: block;
-      background: white;
-      color: black;
     }
 
     /* Highlight search matches */
     mark {
       background: hsl(38, 61%, 73%);
       color: black;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    /* Navigation buttons */
+    .nav-btn {
+      display: none;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .search-container.active .nav-btn {
+      display: inline-block;
+    }
+
+    .nav-btn:hover {
+      background: hsl(38, 61%, 73%);
+      color: #111;
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to Caramel Cafe</h1>
-  <p>Try searching for words like <b>coffee</b>, <b>pastries</b>, or <b>pasta</b>.</p>
-  <p>Lorem ipsum coffee dolor sit amet, smoothies adipiscing elit.</p>
-  <p>Our bakery and pastries are freshly prepared every morning.</p>
-  <p>Delicious pasta and burgers are waiting for you.</p>
-
   <!-- Floating Search Button -->
   <div class="search-container">
     <input type="text" id="searchInput" class="search-input" placeholder="Search...">
-    <button class="search-btn" id="searchBtn">🔍</button>
+    <button class="nav-btn" id="prevBtn">⬆</button>
+    <button class="nav-btn" id="nextBtn">⬇</button>
+    <button class="search-btn" id="searchBtn">🔍︎</button>
   </div>
 
   <script>
     const searchBtn = document.getElementById("searchBtn");
     const searchInput = document.getElementById("searchInput");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let matches = [];
+    let currentIndex = -1;
 
     // Toggle input visibility
     searchBtn.addEventListener("click", () => {
-      searchInput.style.display =
-        searchInput.style.display === "block" ? "none" : "block";
-      if (searchInput.style.display === "block") {
-        searchInput.focus();
+      document.querySelector(".search-container").classList.toggle("active");
+      if (searchInput.style.display !== "block") {
+        resetHighlights();
       }
+      searchInput.focus();
     });
 
-    // Search functionality
-    searchInput.addEventListener("keyup", () => {
-      const query = searchInput.value.toLowerCase();
-      const bodyText = document.body.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a");
-      
+    // Reset highlights
+    function resetHighlights() {
+      matches = [];
+      currentIndex = -1;
+      document.querySelectorAll("mark").forEach(m => {
+        m.replaceWith(m.textContent);
+      });
+    }
+
+    // Highlight matches
+    function highlight(query) {
+      resetHighlights();
+      if (!query) return;
+
+      const bodyText = document.body.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a, li, div");
+      const regex = new RegExp(`(${query})`, "gi");
+
       bodyText.forEach(el => {
-        // Reset old highlights
-        el.innerHTML = el.textContent;
-        if (query && el.textContent.toLowerCase().includes(query)) {
-          const regex = new RegExp(`(${query})`, "gi");
+        if (el.children.length === 0 && regex.test(el.textContent)) {
           el.innerHTML = el.textContent.replace(regex, "<mark>$1</mark>");
         }
       });
+
+      matches = Array.from(document.querySelectorAll("mark"));
+      if (matches.length > 0) {
+        currentIndex = 0;
+        focusMatch();
+      }
+    }
+
+    // Focus current match
+    function focusMatch() {
+      matches.forEach(m => m.style.outline = "none");
+      if (matches[currentIndex]) {
+        matches[currentIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+        matches[currentIndex].style.outline = "2px solid red";
+      }
+    }
+
+    // Input typing
+    searchInput.addEventListener("keyup", () => {
+      highlight(searchInput.value.trim());
+    });
+
+    // Navigation
+    nextBtn.addEventListener("click", () => {
+      if (matches.length > 0) {
+        currentIndex = (currentIndex + 1) % matches.length;
+        focusMatch();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (matches.length > 0) {
+        currentIndex = (currentIndex - 1 + matches.length) % matches.length;
+        focusMatch();
+      }
     });
   </script>
 
