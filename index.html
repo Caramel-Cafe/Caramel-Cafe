@@ -329,7 +329,7 @@
       border-radius: 50%;
       width: 45px;
       height: 45px;
-      font-size: 20px;
+      font-size: 22px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -408,12 +408,10 @@
     let matches = [];
     let currentIndex = -1;
 
-    // Toggle input visibility
+    // Toggle input visibility (keeps visible once opened)
     searchBtn.addEventListener("click", () => {
-      document.querySelector(".search-container").classList.toggle("active");
-      if (searchInput.style.display !== "block") {
-        resetHighlights();
-      }
+      const container = document.querySelector(".search-container");
+      container.classList.add("active"); // always stay active
       searchInput.focus();
     });
 
@@ -479,6 +477,7 @@
 
 </body>
 </html>
+
 
 
 
