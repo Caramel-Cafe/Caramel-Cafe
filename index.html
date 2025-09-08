@@ -298,10 +298,121 @@
 <label for="menu-toggle" class="overlay"></label>
 
 
-<!-- Search Box -->
-<div class="search-box">
-  <input type="text" id="page-search" placeholder="Search the page...">
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Floating Search Button</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* Floating search button container */
+    .search-container {
+      position: fixed;
+      top: 20px;
+      right: 70px; /* next to hamburger */
+      z-index: 1200;
+    }
+
+    /* Search button (lens icon) */
+    .search-btn {
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background: hsl(38, 61%, 73%);
+      color: #111;
+    }
+
+    /* Hidden search input */
+    .search-input {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 50px;
+      width: 200px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+    }
+
+    /* Show input when active */
+    .search-container.active .search-input {
+      display: block;
+      background: white;
+      color: black;
+    }
+
+    /* Highlight search matches */
+    mark {
+      background: hsl(38, 61%, 73%);
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Caramel Cafe</h1>
+  <p>Try searching for words like <b>coffee</b>, <b>pastries</b>, or <b>pasta</b>.</p>
+  <p>Lorem ipsum coffee dolor sit amet, smoothies adipiscing elit.</p>
+  <p>Our bakery and pastries are freshly prepared every morning.</p>
+  <p>Delicious pasta and burgers are waiting for you.</p>
+
+  <!-- Floating Search Button -->
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+    <button class="search-btn" id="searchBtn">🔍</button>
+  </div>
+
+  <script>
+    const searchBtn = document.getElementById("searchBtn");
+    const searchInput = document.getElementById("searchInput");
+
+    // Toggle input visibility
+    searchBtn.addEventListener("click", () => {
+      searchInput.style.display =
+        searchInput.style.display === "block" ? "none" : "block";
+      if (searchInput.style.display === "block") {
+        searchInput.focus();
+      }
+    });
+
+    // Search functionality
+    searchInput.addEventListener("keyup", () => {
+      const query = searchInput.value.toLowerCase();
+      const bodyText = document.body.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a");
+      
+      bodyText.forEach(el => {
+        // Reset old highlights
+        el.innerHTML = el.textContent;
+        if (query && el.textContent.toLowerCase().includes(query)) {
+          const regex = new RegExp(`(${query})`, "gi");
+          el.innerHTML = el.textContent.replace(regex, "<mark>$1</mark>");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
 
 
 
