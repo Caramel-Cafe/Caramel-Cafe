@@ -89,7 +89,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(20,20,20,0.9); /* dark semi-transparent */
+      background: rgba(20,20,20,0.9);
       color: #fff;
       padding: 10px 0;
       display: flex;
@@ -97,10 +97,10 @@
       gap: 18px;
       z-index: 1000;
       backdrop-filter: blur(8px);
-      border-top: 2px solid hsl(38, 61%, 73%); /* gold accent */
+      border-top: 2px solid hsl(38, 61%, 73%);
     }
 
-    /* Menu items */
+    /* Items */
     .bottom-menu a,
     .dropbtn {
       color: #fff;
@@ -110,30 +110,30 @@
       display: inline-block;
       cursor: pointer;
       transition: all 0.3s ease;
+      white-space: nowrap;
+      user-select: none; /* smoother drag */
     }
 
     .bottom-menu a:hover,
     .dropbtn:hover {
-      color: hsl(38, 61%, 73%); /* gold hover */
+      color: hsl(38, 61%, 73%);
     }
 
-    /* Dropdown container */
+    /* Dropdown */
     .dropdown {
       position: relative;
     }
 
-    /* Dropdown content */
     .dropdown-content {
       display: none;
       position: absolute;
       bottom: 100%;
       background: #222;
-      color: #fff;
       min-width: 160px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
       border-radius: 6px;
-      z-index: 1001;
       overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      z-index: 1001;
     }
 
     .dropdown-content a {
@@ -141,7 +141,6 @@
       padding: 10px 14px;
       color: #fff;
       text-decoration: none;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .dropdown-content a:hover {
@@ -149,7 +148,6 @@
       color: #111;
     }
 
-    /* Visible when open */
     .dropdown.open .dropdown-content {
       display: block;
     }
@@ -161,46 +159,42 @@
         padding: 8px 12px;
         gap: 10px;
 
-        /* ✅ Fix: allow horizontal scroll */
         overflow-x: auto;
         white-space: nowrap;
         justify-content: flex-start;
+
+        -webkit-overflow-scrolling: touch; /* smooth iOS */
       }
 
       .bottom-menu::-webkit-scrollbar {
-        display: none; /* hide scrollbar */
+        display: none;
       }
 
       .bottom-menu a,
-      .bottom-menu .dropbtn {
-        flex: 0 0 auto; /* prevent squishing */
+      .dropbtn {
+        flex: 0 0 auto;
       }
 
       .dropdown-content {
-        min-width: 120px;
+        min-width: 140px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Bottom Menu -->
-  <div class="bottom-menu">
-    <a href="#Breakfast Menu">Breakfast</a>
+  <div class="bottom-menu" id="bottomMenu">
+    <a href="#Breakfast">Breakfast</a>
 
     <div class="dropdown">
       <span class="dropbtn">Main Menu ▾</span>
       <div class="dropdown-content">
         <a href="#Starters">Starters</a>
-        <a href="#Fresh Salads">Salads</a>
-        <a href="#Main Course (chicken)">Main Course (Chicken)</a>
-        <a href="#Main Course (beef)">Main Course (Beef)</a>
-        <a href="#Main Course (fish)">Main Course (Fish)</a>
-        <a href="#Habesha">Habesha</a>
+        <a href="#Salads">Salads</a>
+        <a href="#Chicken">Chicken</a>
+        <a href="#Beef">Beef</a>
+        <a href="#Fish">Fish</a>
         <a href="#Pasta">Pasta</a>
-        <a href="#Burgers">Burgers</a>
-        <a href="#Sandwich">Sandwich</a>
-        <a href="#Pizzeria">Pizzeria</a>
       </div>
     </div>
 
@@ -209,54 +203,68 @@
       <div class="dropdown-content">
         <a href="#Coffee">Coffee</a>
         <a href="#Tea">Tea</a>
-        <a href="#Smoothies">Smoothies</a>
-        <a href="#Fresh Juices">Fresh Juices</a>
-        <a href="#Mojitos">Mojitos</a>
-        <a href="#Milkshake">Milkshake</a>
-        <a href="#Soft Drinks">Soft Drinks</a>
-        <a href="#Mocktails">Mocktails</a>
-        <a href="#Cocktails">Cocktails</a>
+        <a href="#Juices">Juices</a>
       </div>
     </div>
 
-    <a href="#Kids Menu">Kids</a>
-    
-    <div class="dropdown">
-      <span class="dropbtn">Bakery & Pastry ▾</span>
-      <div class="dropdown-content">
-        <a href="#Pastries">Pastries</a>
-        <a href="#Bakery">Bakery</a>
-        <a href="#Cookies">Cookies</a>
-      </div>
-    </div>
+    <a href="#Kids">Kids</a>
+    <a href="#Bakery">Bakery</a>
   </div>
 
-  <!-- Script for dropdown toggle -->
   <script>
-    document.querySelectorAll('.dropdown').forEach(drop => {
-      const btn = drop.querySelector('.dropbtn');
-      ['click', 'touchstart'].forEach(evt => {
-        btn.addEventListener(evt, e => {
-          e.preventDefault();
-          e.stopPropagation();
-          // Toggle this dropdown
-          drop.classList.toggle('open');
-          // Close others
-          document.querySelectorAll('.dropdown').forEach(other => {
-            if (other !== drop) other.classList.remove('open');
-          });
+    // Dropdown toggle
+    document.querySelectorAll('.dropdown .dropbtn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const parent = btn.parentElement;
+        parent.classList.toggle('open');
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
         });
       });
     });
 
-    // Close when clicking outside
+    // Close dropdowns when tapping elsewhere
     window.addEventListener('click', () => {
       document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+    });
+
+    // Enable swipe scrolling anywhere on bottom bar
+    const bottomMenu = document.getElementById('bottomMenu');
+    let isDown = false;
+    let startX, scrollLeft;
+
+    bottomMenu.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - bottomMenu.offsetLeft;
+      scrollLeft = bottomMenu.scrollLeft;
+    });
+    bottomMenu.addEventListener('mouseleave', () => isDown = false);
+    bottomMenu.addEventListener('mouseup', () => isDown = false);
+    bottomMenu.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - bottomMenu.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      bottomMenu.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch support
+    let touchStartX = 0, touchScrollLeft = 0;
+    bottomMenu.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = bottomMenu.scrollLeft;
+    });
+    bottomMenu.addEventListener('touchmove', e => {
+      const x = e.touches[0].pageX;
+      const walk = (x - touchStartX) * 1.5;
+      bottomMenu.scrollLeft = touchScrollLeft - walk;
     });
   </script>
 
 </body>
 </html>
+
 
 
 
