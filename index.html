@@ -37,29 +37,18 @@
   <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
   <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
 
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFEZ5J4ZRP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+  // Track both properties
   gtag('config', 'G-DFEZ5J4ZRP');
-</script>
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ESTQ1PLWJM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
   gtag('config', 'G-ESTQ1PLWJM');
 </script>
-  
-</head>
 
-<body id="top">
 
   <!-- 
     - #PRELOADER
@@ -693,82 +682,134 @@ prevBtn.addEventListener("click", ()=>{
               </div>
             </li>
 
+<ul class="menu-list">
 
-            <li>
-  <div class="menu-card hover:card">
+  <li>
+    <div class="menu-card hover:card" data-name="FARMERS BREAKFAST">
 
-    <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-      <img src="./assets/images/Caramel Breaky.webp" width="100" height="100" loading="lazy" alt="CARAMEL BREAKY"
-        class="img-cover" onclick="showWhatsAppOptions('CARAMEL BREAKY')">
-    </figure>
+      <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+        <img src="./assets/images/Farmers Breakfast.webp" width="100" height="100" loading="lazy"
+          alt="FARMERS BREAKFAST" class="img-cover">
+      </figure>
 
-    <div>
-      <div class="title-wrapper">
-        <h3 class="title-3">
-          <a class="card-title">CARAMEL BREAKY</a>
-        </h3>
-        <span class="span title-2">UGX 36,000</span>
+      <div>
+        <div class="title-wrapper">
+          <h3 class="title-3">
+            <a class="card-title">FARMERS BREAKFAST</a>
+          </h3>
+          <span class="span title-2">UGX 32,000</span>
+        </div>
+        <p class="card-text label-1">
+          Spanish omelette is served with our curried creamy spinach, avocado slice,
+          house gourmet bread, bread, and fresh homemade jam.
+        </p>
       </div>
 
-      <p class="card-text label-1">
-        Our signature breakfast burritos with curried chicken strips, peppers, onions, omelette, pair of sausage, sweet and spicy potatoes with garden salad
-      </p>
-
-      <!-- WhatsApp popup -->
-      <div id="whatsapp-options" class="whatsapp-popup" style="display: none;" onclick="event.stopPropagation()">
-        <p>Select a branch to order from:</p>
-        <select id="branchSelect">
-          <option value="">-- Choose Branch --</option>
-          <option value="+256759859795">Munyonyo</option>
-          <option value="+256709410410">Kansanga</option>
-          <option value="+256709769548">Lubowa</option>
-        </select>
-        <br><br>
-        <button id="sendBtn" style="display:none;" onclick="sendWhatsApp()">Send Order</button>
-        <br><br>
-        <button onclick="hideWhatsAppOptions()">Close</button>
-      </div>
     </div>
+  </li>
+
+</ul>
+
+<!-- Popup -->
+<div id="orderPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h3 id="popupName"></h3>
+    <label for="popupQty">Quantity:</label>
+    <input type="number" id="popupQty" value="1" min="1">
+    <button id="confirmOrder">Confirm Order</button>
   </div>
-</li>
+</div>
+
+<style>
+/* Popup style */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+}
+.popup-content h3 {
+  margin-bottom: 15px;
+}
+.popup-content input {
+  width: 80px;
+  padding: 5px;
+  margin: 10px 0;
+  text-align: center;
+}
+.popup-content button {
+  background: #25D366; /* WhatsApp green */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.popup-content button:hover {
+  background: #1ebe57;
+}
+.close {
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+</style>
 
 <script>
+const menuCards = document.querySelectorAll(".menu-card");
+const popup = document.getElementById("orderPopup");
+const popupName = document.getElementById("popupName");
+const popupQty = document.getElementById("popupQty");
+const confirmOrder = document.getElementById("confirmOrder");
+const closeBtn = document.querySelector(".close");
+
 let selectedItem = "";
 
-function showWhatsAppOptions(itemName) {
-  selectedItem = itemName;
-  document.getElementById("whatsapp-options").style.display = "block";
-
-  // reset branch + hide button each time
-  document.getElementById("branchSelect").value = "";
-  document.getElementById("sendBtn").style.display = "none";
-}
-
-function hideWhatsAppOptions() {
-  document.getElementById("whatsapp-options").style.display = "none";
-}
-
-document.getElementById("branchSelect").addEventListener("change", function() {
-  if (this.value) {
-    document.getElementById("sendBtn").style.display = "inline-block";
-  } else {
-    document.getElementById("sendBtn").style.display = "none";
-  }
+menuCards.forEach(card => {
+  card.addEventListener("click", () => {
+    selectedItem = card.dataset.name;
+    popupName.textContent = selectedItem;
+    popup.style.display = "flex";
+  });
 });
 
-function sendWhatsApp() {
-  const branchNumber = document.getElementById("branchSelect").value;
-  if (!branchNumber) return;
+closeBtn.addEventListener("click", () => {
+  popup.style.display = "none";
+});
 
-  const message = encodeURIComponent(`Hello, I would like to order: ${selectedItem}`);
-  const url = `https://wa.me/${branchNumber}?text=${message}`;
+confirmOrder.addEventListener("click", () => {
+  const qty = popupQty.value;
+  const message = `I would like to order ${selectedItem} (x${qty})`;
+  const phoneNumber = "2567XXXXXXXX"; // replace with your WhatsApp number (without +)
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
-}
+  popup.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+});
 </script>
 
-
             
-      <li>
+         <li>
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
