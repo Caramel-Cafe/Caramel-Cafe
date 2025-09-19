@@ -302,45 +302,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fancy Floating Search</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: #111;
-      color: white;
-      min-height: 200vh; /* just to allow scrolling */
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fancy Search with Counter</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #111;
+  color: white;
+  min-height: 200vh;
+  padding: 20px;
+}
 
-  /* Floating search container */
 .search-container {
   position: fixed;
   top: 20px;
-  left: 20px;  
+  left: 20px;
   z-index: 1200;
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(30, 30, 30, 0.9);
+  background: rgba(30, 30, 30, 0.6);
   border-radius: 40px;
   padding: 6px 14px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.45);
-  transition: width 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-  width: 55px;  /* compact start */
+  width: 55px;
   overflow: hidden;
-  backdrop-filter: blur(6px); /* glass effect */
+  transition: width 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-/* Expanded state */
 .search-container.active {
-  width: 280px;
-  background: rgba(40, 40, 40, 0.95);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  width: 320px;
+  background: rgba(40, 40, 40, 0.9);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
-/* Search icon button */
 .search-btn {
   background: none;
   color: #f1f1f1;
@@ -348,15 +346,9 @@
   font-size: 22px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 0.2s ease, color 0.2s ease;
 }
+.search-btn:hover { color: hsl(38, 85%, 65%); }
 
-.search-btn:hover {
-  color: hsl(38, 85%, 65%);
-  transform: scale(1.1);
-}
-
-/* Search input */
 .search-input {
   flex: 1;
   padding: 6px 10px;
@@ -367,46 +359,31 @@
   color: white;
   display: none;
 }
+.search-container.active .search-input { display: block; }
+.search-input::placeholder { color: #aaa; font-style: italic; }
 
-.search-container.active .search-input {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
-.search-input::placeholder {
-  color: #aaa;
-  font-style: italic;
-}
-
-/* Navigation buttons (fancy arrows) */
 .nav-btn {
   display: none;
   background: #555;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
   cursor: pointer;
-  line-height: 32px;
+  line-height: 30px;
   text-align: center;
-  transition: background 0.3s ease, transform 0.2s ease;
 }
-
-.search-container.active .nav-btn {
+.search-container.active .nav-btn,
+.search-container.active .counter {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.nav-btn:hover {
-  background: hsl(38, 85%, 65%);
-  color: #111;
-  transform: scale(1.15);
-}
+.nav-btn:hover { background: hsl(38, 85%, 65%); color: #111; }
 
-/* Highlighted search text */
 mark {
   background: hsl(38, 90%, 65%);
   color: black;
@@ -415,11 +392,104 @@ mark {
   font-weight: bold;
 }
 
-/* Fade in effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
+ul.menu-list { list-style: none; padding: 0; }
+.menu-card { background: #222; border-radius: 10px; margin: 15px 0; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+</style>
+</head>
+<body>
+
+<!-- Floating Search -->
+<div class="search-container" id="searchContainer">
+  <button class="search-btn" id="searchBtn">⌕</button>
+  <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+  <span class="counter" id="counter"></span>
+  <button class="nav-btn" id="prevBtn">▲</button>
+  <button class="nav-btn" id="nextBtn">▼</button>
+</div>
+
+<script>
+const container = document.getElementById("searchContainer");
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const counter = document.getElementById("counter");
+
+let matches = [];
+let currentIndex = -1;
+
+// Expand search and focus
+searchBtn.addEventListener("click", () => {
+  container.classList.add("active");
+  searchInput.focus();
+});
+
+// Collapse by clicking outside (ignore clicks inside container)
+document.addEventListener("click", e => {
+  if (!container.contains(e.target)) {
+    container.classList.remove("active");
+    resetHighlights();
+  }
+});
+
+// Prevent collapse on clicks inside
+container.addEventListener("click", e => e.stopPropagation());
+
+// Reset highlights (do NOT clear input)
+function resetHighlights(){
+  matches=[];
+  currentIndex=-1;
+  counter.textContent='';
+  document.querySelectorAll("mark").forEach(m=>m.replaceWith(m.textContent));
 }
+
+// Highlight text
+function highlight(query){
+  resetHighlights();
+  if(!query) return;
+  const elements=document.querySelectorAll("body *:not(script):not(style):not(.search-container):not(.search-container *)");
+  const regex=new RegExp(`(${query})`,"gi");
+  elements.forEach(el=>{
+    if(el.children.length===0 && regex.test(el.textContent)){
+      el.innerHTML=el.textContent.replace(regex,"<mark>$1</mark>");
+    }
+  });
+  matches=Array.from(document.querySelectorAll("mark"));
+  if(matches.length>0){
+    currentIndex=0;
+    updateCounter();
+    focusMatch();
+  }
+}
+
+function focusMatch(){
+  matches.forEach(m=>m.style.outline='none');
+  if(matches[currentIndex]){
+    matches[currentIndex].scrollIntoView({behavior:'smooth', block:'center'});
+    matches[currentIndex].style.outline='2px solid red';
+    updateCounter();
+  }
+}
+
+function updateCounter(){
+  if(matches.length>0) counter.textContent=`${currentIndex+1}/${matches.length}`;
+  else counter.textContent='';
+}
+
+// Typing
+searchInput.addEventListener("input", ()=> highlight(searchInput.value.trim()));
+
+// Navigation
+nextBtn.addEventListener("click", ()=>{
+  if(matches.length>0){ currentIndex=(currentIndex+1)%matches.length; focusMatch();}
+});
+prevBtn.addEventListener("click", ()=>{
+  if(matches.length>0){ currentIndex=(currentIndex-1+matches.length)%matches.length; focusMatch();}
+});
+</script>
+</body>
+</html>
+
 
 
 
