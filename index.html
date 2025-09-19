@@ -158,9 +158,24 @@
     @media (max-width: 600px) {
       .bottom-menu {
         font-size: 12px;
-        padding: 8px 0;
+        padding: 8px 12px;
         gap: 10px;
+
+        /* ✅ Fix: allow horizontal scroll */
+        overflow-x: auto;
+        white-space: nowrap;
+        justify-content: flex-start;
       }
+
+      .bottom-menu::-webkit-scrollbar {
+        display: none; /* hide scrollbar */
+      }
+
+      .bottom-menu a,
+      .bottom-menu .dropbtn {
+        flex: 0 0 auto; /* prevent squishing */
+      }
+
       .dropdown-content {
         min-width: 120px;
       }
@@ -168,8 +183,6 @@
   </style>
 </head>
 <body>
-
-
 
   <!-- Bottom Menu -->
   <div class="bottom-menu">
@@ -244,6 +257,7 @@
 
 </body>
 </html>
+
 
 
 
