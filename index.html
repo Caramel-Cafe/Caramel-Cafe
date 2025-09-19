@@ -314,190 +314,112 @@
       min-height: 200vh; /* just to allow scrolling */
     }
 
-    /* Floating search container */
-    .search-container {
-      position: fixed;
-      top: 20px;
-      left: 20px;  /* opposite side of hamburger */
-      z-index: 1200;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #222;
-      border-radius: 30px;
-      padding: 6px 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-      transition: width 0.3s ease, background 0.3s ease;
-      width: 50px;  /* start small */
-      overflow: hidden;
-    }
+  /* Floating search container */
+.search-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;  
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30, 30, 30, 0.9);
+  border-radius: 40px;
+  padding: 6px 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.45);
+  transition: width 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  width: 55px;  /* compact start */
+  overflow: hidden;
+  backdrop-filter: blur(6px); /* glass effect */
+}
 
-    /* Expanded state */
-    .search-container.active {
-      width: 250px; /* expand smoothly */
-      background: #333;
-    }
+/* Expanded state */
+.search-container.active {
+  width: 280px;
+  background: rgba(40, 40, 40, 0.95);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
 
-    /* Search icon button */
-    .search-btn {
-      background: none;
-      color: white;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
+/* Search icon button */
+.search-btn {
+  background: none;
+  color: #f1f1f1;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
 
-    .search-btn:hover {
-      color: hsl(38, 61%, 73%);
-    }
+.search-btn:hover {
+  color: hsl(38, 85%, 65%);
+  transform: scale(1.1);
+}
 
-    /* Search input */
-    .search-input {
-      flex: 1;
-      padding: 6px 10px;
-      border: none;
-      font-size: 15px;
-      outline: none;
-      background: transparent;
-      color: white;
-      display: none;
-    }
+/* Search input */
+.search-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  background: transparent;
+  color: white;
+  display: none;
+}
 
-    .search-container.active .search-input {
-      display: block;
-    }
+.search-container.active .search-input {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
 
-    .search-input::placeholder {
-      color: #bbb;
-    }
+.search-input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
 
-    /* Navigation buttons (fancy arrows) */
-    .nav-btn {
-      display: none;
-      background: #444;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      line-height: 30px;
-      text-align: center;
-    }
+/* Navigation buttons (fancy arrows) */
+.nav-btn {
+  display: none;
+  background: #555;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 32px;
+  text-align: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    .search-container.active .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+.search-container.active .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .nav-btn:hover {
-      background: hsl(38, 61%, 73%);
-      color: #111;
-    }
+.nav-btn:hover {
+  background: hsl(38, 85%, 65%);
+  color: #111;
+  transform: scale(1.15);
+}
 
-    /* Highlighted search text */
-    mark {
-      background: hsl(38, 61%, 73%);
-      color: black;
-      padding: 2px 4px;
-      border-radius: 3px;
-    }
-  </style>
-</head>
-<body>
+/* Highlighted search text */
+mark {
+  background: hsl(38, 90%, 65%);
+  color: black;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: bold;
+}
 
-  <!-- Floating Search -->
-  <div class="search-container" id="searchContainer">
-    <button class="search-btn" id="searchBtn">⌕</button>
-    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
-    <button class="nav-btn" id="prevBtn">▲</button>
-    <button class="nav-btn" id="nextBtn">▼</button>
-  </div>
-
-  <script>
-    const container = document.getElementById("searchContainer");
-    const searchBtn = document.getElementById("searchBtn");
-    const searchInput = document.getElementById("searchInput");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    let matches = [];
-    let currentIndex = -1;
-
-    // Toggle expand on button click
-    searchBtn.addEventListener("click", () => {
-      container.classList.toggle("active");
-      if (container.classList.contains("active")) {
-        searchInput.focus();
-      } else {
-        resetHighlights();
-      }
-    });
-
-    // Reset highlights
-    function resetHighlights() {
-      matches = [];
-      currentIndex = -1;
-      document.querySelectorAll("mark").forEach(m => {
-        m.replaceWith(m.textContent);
-      });
-    }
-
-    // Highlight matches
-    function highlight(query) {
-      resetHighlights();
-      if (!query) return;
-
-      const bodyText = document.body.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a, li, div");
-      const regex = new RegExp(`(${query})`, "gi");
-
-      bodyText.forEach(el => {
-        if (el.children.length === 0 && regex.test(el.textContent)) {
-          el.innerHTML = el.textContent.replace(regex, "<mark>$1</mark>");
-        }
-      });
-
-      matches = Array.from(document.querySelectorAll("mark"));
-      if (matches.length > 0) {
-        currentIndex = 0;
-        focusMatch();
-      }
-    }
-
-    // Focus current match
-    function focusMatch() {
-      matches.forEach(m => m.style.outline = "none");
-      if (matches[currentIndex]) {
-        matches[currentIndex].scrollIntoView({ behavior: "smooth", block: "center" });
-        matches[currentIndex].style.outline = "2px solid red";
-      }
-    }
-
-    // Input typing
-    searchInput.addEventListener("keyup", () => {
-      highlight(searchInput.value.trim());
-    });
-
-    // Navigation
-    nextBtn.addEventListener("click", () => {
-      if (matches.length > 0) {
-        currentIndex = (currentIndex + 1) % matches.length;
-        focusMatch();
-      }
-    });
-
-    prevBtn.addEventListener("click", () => {
-      if (matches.length > 0) {
-        currentIndex = (currentIndex - 1 + matches.length) % matches.length;
-        focusMatch();
-      }
-    });
-  </script>
-</body>
-</html>
+/* Fade in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
 
 
